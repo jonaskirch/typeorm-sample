@@ -11,12 +11,13 @@ export default class CreateCustomers1614550098782
             name: 'id',
             type: 'integer',
             isPrimary: true,
+            isGenerated: true,
             generationStrategy: 'increment',
           },
           {
             name: 'name',
             type: 'varchar',
-            isNullable: false,
+            // isNullable: false,
           },
           {
             name: 'document',
@@ -27,7 +28,12 @@ export default class CreateCustomers1614550098782
           {
             name: 'email',
             type: 'varchar',
+            isNullable: true,
           },
+          // {
+          //   name: 'createdAt',
+          //   type: 'timestamp with time zone',
+          // },
         ],
       }),
     );
