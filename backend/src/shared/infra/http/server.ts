@@ -2,7 +2,7 @@ import 'reflect-metadata';
 import dotenv from 'dotenv';
 import express from 'express';
 import routes from './routes';
-import './database';
+import '@shared/infra/typeorm';
 
 dotenv.config();
 

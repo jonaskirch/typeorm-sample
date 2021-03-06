@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { getCustomRepository } from 'typeorm';
-import CustomersRepository from '../repositories/CustomersRepository';
-import CreateCustomerService from '../services/CreateCustomerService';
+import CustomersRepository from '@modules/customers/repositories/CustomersRepository';
+import CreateCustomerService from '@modules/customers/services/CreateCustomerService';
 
 const customersRouter = Router();
 

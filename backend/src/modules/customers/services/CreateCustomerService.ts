@@ -1,6 +1,6 @@
 import { getCustomRepository } from 'typeorm';
-import CustomerRepository from '../repositories/CustomersRepository';
-import Customer from '../models/Customer';
+import Customer from '@modules/customers/infra/typeorm/entities/Customer';
+import CustomerRepository from '@modules/customers/repositories/CustomersRepository';
 
 interface Request {
   name: string;
