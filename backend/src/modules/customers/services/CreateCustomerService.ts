@@ -1,29 +1,31 @@
-import { getCustomRepository } from 'typeorm';
 import Customer from '@modules/customers/infra/typeorm/entities/Customer';
-import CustomerRepository from '@modules/customers/repositories/CustomersRepository';
+import { injectable, inject } from 'tsyringe';
+import ICustomersRepository from '../repositories/ICustomersRepository';
 
-interface Request {
+interface IRequest {
   name: string;
   document: string;
   email: string;
 }
 
+@injectable()
 class CreateCustomerService {
-  public async execute({ name, document, email }: Request): Promise<Customer> {
-    const customerRepository = getCustomRepository(CustomerRepository);
+  constructor(
+    @inject('CustomersRepository')
+    private customersRepository: ICustomersRepository,
+  ) {}
 
-    const find = await customerRepository.findByDocument(document);
+  public async execute({ name, document, email }: IRequest): Promise<Customer> {
+    const find = await this.customersRepository.findByDocument(document);
     if (find) {
       throw Error('Already exists customer with same document');
     }
 
-    const customer = customerRepository.create({
+    const customer = await this.customersRepository.create({
       name,
       document,
       email,
     });
-
-    await customerRepository.save(customer);
 
     return customer;
   }
