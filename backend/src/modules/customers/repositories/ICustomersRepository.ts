@@ -1,4 +1,3 @@
-import { DeleteResult } from 'typeorm';
 import Customer from '@modules/customers/infra/typeorm/entities/Customer';
 import ICreateCustomerDTO from '@modules/customers/dtos/ICreateCustomerDTO';
 
@@ -13,5 +12,5 @@ export default interface ICustomersRepository {
 
   save(data: ICreateCustomerDTO): Promise<Customer>;
 
-  deleteById(id: number): Promise<DeleteResult>;
+  deleteById(id: number): Promise<boolean>;
 }

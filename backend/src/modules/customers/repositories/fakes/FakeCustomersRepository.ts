@@ -1,51 +1,47 @@
-import { getRepository, Repository } from 'typeorm';
 import ICustomerRepository from '@modules/customers/repositories/ICustomersRepository';
 import ICreateCustomerDTO from '@modules/customers/dtos/ICreateCustomerDTO';
+
 import Customer from '@modules/customers/infra/typeorm/entities/Customer';
 
 class CustomersRepository implements ICustomerRepository {
-  private ormRepository: Repository<Customer>;
-
-  constructor() {
-    this.ormRepository = getRepository(Customer);
-  }
+  private customers: Customer[] = [];
 
   public async create({
     name,
     document,
     email,
   }: ICreateCustomerDTO): Promise<Customer> {
-    const customer = this.ormRepository.create({ name, document, email });
-    await this.ormRepository.save(customer);
+    const customer = new Customer();
+    Object.assign(customer, { id: 1, name, document, email });
+    this.customers.push(customer);
     return customer;
   }
 
   public async findAll(): Promise<Customer[]> {
-    const customers = await this.ormRepository.find();
-    return customers;
+    return this.customers;
   }
 
   public async findById(id: number): Promise<Customer | undefined> {
-    const customer = await this.ormRepository.findOne(id);
-    return customer;
+    const find = this.customers.find(customer => customer.id === id);
+    return find;
   }
 
   public async findByDocument(document: string): Promise<Customer | undefined> {
-    const find = await this.ormRepository.findOne({
-      where: { document },
-    });
-
+    const find = this.customers.find(
+      customer => customer.document === document,
+    );
     return find;
   }
 
   public async save(data: ICreateCustomerDTO): Promise<Customer> {
-    const customer = await this.ormRepository.save(data);
+    // TODO:
+    const customer = new Customer();
     return customer;
   }
 
   public async deleteById(id: number): Promise<boolean> {
-    const result = await this.ormRepository.delete(id);
-    if (result && result.affected && result.affected > 0) return true;
+    const index = this.customers.findIndex(customer => customer.id === id);
+    if (index >= 0) return this.customers.splice(index, 1).length > 0;
     return false;
   }
 }
