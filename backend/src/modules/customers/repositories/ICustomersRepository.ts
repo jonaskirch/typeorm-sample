@@ -6,11 +6,11 @@ export default interface ICustomersRepository {
 
   findAll(): Promise<Customer[]>;
 
-  findById(id: number): Promise<Customer | undefined>;
+  findById(id: string): Promise<Customer | undefined>;
 
   findByDocument(document: string): Promise<Customer | undefined>;
 
   save(data: ICreateCustomerDTO): Promise<Customer>;
 
-  deleteById(id: number): Promise<boolean>;
+  deleteById(id: string): Promise<boolean>;
 }

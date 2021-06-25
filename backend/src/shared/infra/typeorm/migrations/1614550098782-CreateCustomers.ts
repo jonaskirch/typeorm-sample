@@ -9,10 +9,11 @@ export default class CreateCustomers1614550098782
         columns: [
           {
             name: 'id',
-            type: 'integer',
+            type: 'varchar',
             isPrimary: true,
-            isGenerated: true,
-            generationStrategy: 'increment',
+            // isGenerated: true,
+            generationStrategy: 'uuid',
+            default: 'uuid_generate_v4()',
           },
           {
             name: 'name',
@@ -30,10 +31,16 @@ export default class CreateCustomers1614550098782
             type: 'varchar',
             isNullable: true,
           },
-          // {
-          //   name: 'createdAt',
-          //   type: 'timestamp with time zone',
-          // },
+          {
+            name: 'createdAt',
+            type: 'timestamp with time zone',
+            default: 'NOW()',
+          },
+          {
+            name: 'updateAt',
+            type: 'timestamp with time zone',
+            default: 'NOW()',
+          },
         ],
       }),
     );

@@ -25,7 +25,7 @@ class CustomersController {
   public async show(req: Request, resp: Response): Promise<Response> {
     const customersRepository = new CustomersRepository();
     const { id } = req.params;
-    const customer = await customersRepository.findById(Number(id));
+    const customer = await customersRepository.findById(id);
     if (!customer) {
       throw new AppError(`Doesn't exists customer with id ${id}`);
     }
@@ -37,7 +37,7 @@ class CustomersController {
     const { id } = req.params;
     const { name, email } = req.body;
 
-    let customer = await customersRepository.findById(Number(id));
+    let customer = await customersRepository.findById(id);
     if (!customer) {
       throw new AppError(`Doesn't exists customer with id ${id}`);
     }
@@ -64,7 +64,7 @@ class CustomersController {
   public async delete(req: Request, resp: Response): Promise<Response> {
     const customersRepository = new CustomersRepository();
     const { id } = req.params;
-    const { affected } = await customersRepository.deleteById(Number(id));
+    const affected = await customersRepository.deleteById(id);
     if (!affected) throw new AppError(`Doesn't exists customer with id ${id}`);
     return resp.json({ id });
   }

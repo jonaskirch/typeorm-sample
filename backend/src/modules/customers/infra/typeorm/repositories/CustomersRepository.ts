@@ -25,7 +25,7 @@ class CustomersRepository implements ICustomerRepository {
     return customers;
   }
 
-  public async findById(id: number): Promise<Customer | undefined> {
+  public async findById(id: string): Promise<Customer | undefined> {
     const customer = await this.ormRepository.findOne(id);
     return customer;
   }
@@ -43,7 +43,7 @@ class CustomersRepository implements ICustomerRepository {
     return customer;
   }
 
-  public async deleteById(id: number): Promise<boolean> {
+  public async deleteById(id: string): Promise<boolean> {
     const result = await this.ormRepository.delete(id);
     if (result && result.affected && result.affected > 0) return true;
     return false;

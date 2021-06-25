@@ -21,7 +21,7 @@ class CustomersRepository implements ICustomerRepository {
     return this.customers;
   }
 
-  public async findById(id: number): Promise<Customer | undefined> {
+  public async findById(id: string): Promise<Customer | undefined> {
     const find = this.customers.find(customer => customer.id === id);
     return find;
   }
@@ -39,7 +39,7 @@ class CustomersRepository implements ICustomerRepository {
     return customer;
   }
 
-  public async deleteById(id: number): Promise<boolean> {
+  public async deleteById(id: string): Promise<boolean> {
     const index = this.customers.findIndex(customer => customer.id === id);
     if (index >= 0) return this.customers.splice(index, 1).length > 0;
     return false;
