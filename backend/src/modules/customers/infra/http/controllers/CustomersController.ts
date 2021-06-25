@@ -1,8 +1,11 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import CustomersRepository from '@modules/customers/infra/typeorm/repositories/CustomersRepository';
+import CustomersRepository2 from '@modules/customers/infra/typeorm/repositories/CustomersRepository2';
 import CreateCustomerService from '@modules/customers/services/CreateCustomerService';
 import AppError from '@shared/errors/AppError';
+import Customer from '../../typeorm/entities/Customer';
+// : TODO.. ver como fazer testar...
 
 class CustomersController {
   public async create(req: Request, resp: Response): Promise<Response> {
@@ -17,7 +20,7 @@ class CustomersController {
   }
 
   public async index(req: Request, resp: Response): Promise<Response> {
-    const customersRepository = new CustomersRepository();
+    const customersRepository = new CustomersRepository2(Customer);
     const customers = await customersRepository.findAll();
     return resp.json(customers);
   }
