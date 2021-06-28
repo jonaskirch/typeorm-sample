@@ -1,11 +1,8 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import CustomersRepository from '@modules/customers/infra/typeorm/repositories/CustomersRepository';
-import CustomersRepository2 from '@modules/customers/infra/typeorm/repositories/CustomersRepository2';
 import CreateCustomerService from '@modules/customers/services/CreateCustomerService';
 import AppError from '@shared/errors/AppError';
-import Customer from '../../typeorm/entities/Customer';
-// : TODO.. ver como fazer testar...
 
 class CustomersController {
   public async create(req: Request, resp: Response): Promise<Response> {
@@ -20,13 +17,13 @@ class CustomersController {
   }
 
   public async index(req: Request, resp: Response): Promise<Response> {
-    const customersRepository = new CustomersRepository2(Customer);
+    const customersRepository = container.resolve(CustomersRepository);
     const customers = await customersRepository.findAll();
     return resp.json(customers);
   }
 
   public async show(req: Request, resp: Response): Promise<Response> {
-    const customersRepository = new CustomersRepository();
+    const customersRepository = container.resolve(CustomersRepository);
     const { id } = req.params;
     const customer = await customersRepository.findById(id);
     if (!customer) {
@@ -36,7 +33,7 @@ class CustomersController {
   }
 
   public async update(req: Request, resp: Response): Promise<Response> {
-    const customersRepository = new CustomersRepository();
+    const customersRepository = container.resolve(CustomersRepository);
     const { id } = req.params;
     const { name, email } = req.body;
 
@@ -65,7 +62,7 @@ class CustomersController {
   }
 
   public async delete(req: Request, resp: Response): Promise<Response> {
-    const customersRepository = new CustomersRepository();
+    const customersRepository = container.resolve(CustomersRepository);
     const { id } = req.params;
     const affected = await customersRepository.deleteById(id);
     if (!affected) throw new AppError(`Doesn't exists customer with id ${id}`);

@@ -6,7 +6,7 @@ class BaseRepository<ICreateDTO, Entity>
   protected ormRepository: Repository<Entity>;
 
   constructor(entity: EntityTarget<Entity>) {
-    this.ormRepository = getRepository(entity);
+    this.ormRepository = getRepository<Entity>(entity);
   }
 
   public async create(data: ICreateDTO): Promise<Entity> {

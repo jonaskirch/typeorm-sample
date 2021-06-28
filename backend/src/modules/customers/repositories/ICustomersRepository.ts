@@ -1,16 +1,8 @@
+import IBaseRepository from '@shared/infra/typeorm/IBaseRepository';
 import Customer from '@modules/customers/infra/typeorm/entities/Customer';
 import ICreateCustomerDTO from '@modules/customers/dtos/ICreateCustomerDTO';
 
-export default interface ICustomersRepository {
-  create(data: ICreateCustomerDTO): Promise<Customer>;
-
-  findAll(): Promise<Customer[]>;
-
-  findById(id: string): Promise<Customer | undefined>;
-
+export default interface ICustomersRepository2
+  extends IBaseRepository<ICreateCustomerDTO, Customer> {
   findByDocument(document: string): Promise<Customer | undefined>;
-
-  save(data: ICreateCustomerDTO): Promise<Customer>;
-
-  deleteById(id: string): Promise<boolean>;
 }
