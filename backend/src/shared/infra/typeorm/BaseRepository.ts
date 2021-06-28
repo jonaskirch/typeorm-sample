@@ -1,4 +1,9 @@
-import { getRepository, Repository, EntityTarget } from 'typeorm';
+import {
+  getRepository,
+  Repository,
+  EntityTarget,
+  getConnection,
+} from 'typeorm';
 import IBaseRepository from './IBaseRepository';
 
 class BaseRepository<ICreateDTO, Entity>
@@ -6,7 +11,7 @@ class BaseRepository<ICreateDTO, Entity>
   protected ormRepository: Repository<Entity>;
 
   constructor(entity: EntityTarget<Entity>) {
-    this.ormRepository = getRepository<Entity>(entity);
+    this.ormRepository = getConnection('main').getRepository<Entity>(entity);
   }
 
   public async create(data: ICreateDTO): Promise<Entity> {
