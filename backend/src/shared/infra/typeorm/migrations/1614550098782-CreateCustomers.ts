@@ -5,7 +5,7 @@ import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 export default class CreateCustomers1614550098782
   implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
-    // await queryRunner.createDatabase('typeorm_sample', false);
+    // await queryRunner.createDatabase('typeorm_sample', true);
     // await createDatabase(undefined, config);
     await queryRunner.createTable(
       new Table({

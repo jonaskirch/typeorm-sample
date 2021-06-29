@@ -15,7 +15,11 @@ class CreateCustomerService {
     private customersRepository: ICustomersRepository,
   ) {}
 
-  public async execute({ name, document, email }: IRequest): Promise<Customer> {
+  public async execute(
+    organizationSlug: string,
+    { name, document, email }: IRequest,
+  ): Promise<Customer> {
+    await this.customersRepository.initialize(organizationSlug);
     const find = await this.customersRepository.findByDocument(document);
     if (find) {
       throw Error('Already exists customer with same document');

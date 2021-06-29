@@ -1,17 +1,41 @@
 import {
-  getRepository,
   Repository,
   EntityTarget,
-  getConnection,
+  createConnection,
+  getConnectionManager,
+  ConnectionOptions,
 } from 'typeorm';
+import connectionOptions from '@shared/infra/typeorm/config';
+import { createDatabase } from 'typeorm-extension';
 import IBaseRepository from './IBaseRepository';
 
 class BaseRepository<ICreateDTO, Entity>
   implements IBaseRepository<ICreateDTO, Entity> {
   protected ormRepository: Repository<Entity>;
 
+  private entity: EntityTarget<Entity>;
+
   constructor(entity: EntityTarget<Entity>) {
-    this.ormRepository = getConnection('main').getRepository<Entity>(entity);
+    this.entity = entity;
+  }
+
+  public async initialize(organizationSlug = 'main'): Promise<void> {
+    const connection = await this.getConnection(organizationSlug);
+    this.ormRepository = connection.getRepository<Entity>(this.entity);
+  }
+
+  private async getConnection(organizationSlug: string) {
+    const connectionManager = getConnectionManager();
+    if (connectionManager.has(organizationSlug)) {
+      const connection = connectionManager.get(organizationSlug);
+      return Promise.resolve(
+        connection.isConnected ? connection : connection.connect(),
+      );
+    }
+
+    const options: ConnectionOptions = connectionOptions(organizationSlug);
+    await createDatabase({ ifNotExist: true }, options);
+    return createConnection(options);
   }
 
   public async create(data: ICreateDTO): Promise<Entity> {
