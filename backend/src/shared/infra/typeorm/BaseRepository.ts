@@ -5,7 +5,7 @@ import {
   getConnectionManager,
   ConnectionOptions,
 } from 'typeorm';
-import connectionOptions from '@shared/infra/typeorm/config';
+import connectionOptions from '@config/typeorm';
 import { createDatabase } from 'typeorm-extension';
 import IBaseRepository from './IBaseRepository';
 

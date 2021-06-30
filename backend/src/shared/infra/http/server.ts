@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import '@shared/config/dotenv';
+import '@config/dotenv';
 import express from 'express';
 import 'express-async-errors';
 import errorsMiddleware from '@shared/infra/http/middlewares/errorsMiddleware';
