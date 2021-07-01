@@ -6,7 +6,7 @@ describe('CreateCustomer', () => {
     const fakeCustomersRepository = new FakeCustomersRepository();
     const customerService = new CustomerService(fakeCustomersRepository);
 
-    const customer = await customerService.create({
+    const customer = await customerService.create('main', {
       name: 'Fulano',
       document: '12345678910',
       email: 'teste@teste.com',

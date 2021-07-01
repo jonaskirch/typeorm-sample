@@ -3,7 +3,7 @@ import {
   createCustomer,
   updateCustomer,
 } from '@modules/customers/validators/CustomersValidator';
-import validate from '@shared/infra/http/middlewares/validatorMiddleware';
+import validate from '@middlewares/validatorMiddleware';
 import CustomersController from '../controllers/CustomersController';
 
 const customersRouter = Router();

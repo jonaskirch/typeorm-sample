@@ -1,6 +1,6 @@
-import Customer from '@modules/customers/infra/typeorm/entities/Customer';
+import Customer from '@modules/customers/entities/Customer';
 import { injectable, inject } from 'tsyringe';
-import AppError from '@shared/errors/AppError';
+import AppError from '@errors/AppError';
 import ICustomersRepository from '../repositories/ICustomersRepository';
 
 interface IRequest {

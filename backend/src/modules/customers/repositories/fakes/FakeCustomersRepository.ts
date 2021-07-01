@@ -1,10 +1,14 @@
 import ICustomerRepository from '@modules/customers/repositories/ICustomersRepository';
 import ICreateCustomerDTO from '@modules/customers/dtos/ICreateCustomerDTO';
 
-import Customer from '@modules/customers/infra/typeorm/entities/Customer';
+import Customer from '@modules/customers/entities/Customer';
 
 class CustomersRepository implements ICustomerRepository {
   private customers: Customer[] = [];
+
+  public async initialize(organizationSlug = 'main'): Promise<void> {
+    this.customers = [];
+  }
 
   public async create({
     name,

@@ -1,5 +1,5 @@
 import { Entity, Column } from 'typeorm';
-import BaseEntity from '@shared/infra/typeorm/BaseEntity';
+import BaseEntity from '@database/BaseEntity';
 
 @Entity('customers')
 class Customer extends BaseEntity {

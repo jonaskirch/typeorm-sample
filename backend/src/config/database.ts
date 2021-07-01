@@ -12,11 +12,11 @@ function getConnectionOptions(organizationSlug = 'main'): ConnectionOptions {
     username: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     migrationsRun: true,
-    entities: ['./src/modules/**/infra/typeorm/entities/*.ts'],
-    migrations: ['./src/shared/infra/typeorm/migrations/*.ts'],
+    entities: ['./src/modules/**/entities/*.ts'],
+    migrations: ['./src/database/migrations/*.ts'],
     cli: {
-      entitiesDir: './src/modules/**/infra/typeorm/entities/',
-      migrationsDir: './src/shared/infra/typeorm/migrations/',
+      entitiesDir: './src/modules/**/entities/',
+      migrationsDir: './src/database/migrations/',
     },
   };
 }

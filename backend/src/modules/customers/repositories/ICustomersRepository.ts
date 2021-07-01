@@ -1,5 +1,5 @@
-import IBaseRepository from '@shared/infra/typeorm/IBaseRepository';
-import Customer from '@modules/customers/infra/typeorm/entities/Customer';
+import IBaseRepository from '@database/IBaseRepository';
+import Customer from '@modules/customers/entities/Customer';
 import ICreateCustomerDTO from '@modules/customers/dtos/ICreateCustomerDTO';
 
 export default interface ICustomersRepository

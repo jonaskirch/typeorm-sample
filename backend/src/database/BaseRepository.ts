@@ -5,7 +5,7 @@ import {
   getConnectionManager,
   ConnectionOptions,
 } from 'typeorm';
-import connectionOptions from '@config/typeorm';
+import getConnectionOptions from '@config/database';
 import { createDatabase } from 'typeorm-extension';
 import IBaseRepository from './IBaseRepository';
 
@@ -33,7 +33,7 @@ class BaseRepository<ICreateDTO, Entity>
       );
     }
 
-    const options: ConnectionOptions = connectionOptions(organizationSlug);
+    const options: ConnectionOptions = getConnectionOptions(organizationSlug);
     await createDatabase({ ifNotExist: true }, options);
     return createConnection(options);
   }

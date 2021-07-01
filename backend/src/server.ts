@@ -2,10 +2,10 @@ import 'reflect-metadata';
 import '@config/dotenv';
 import express from 'express';
 import 'express-async-errors';
-import errorsMiddleware from '@shared/infra/http/middlewares/errorsMiddleware';
+import errorsMiddleware from '@middlewares/errorsMiddleware';
 import routes from './routes';
-import '@shared/container';
-import '@shared/infra/typeorm';
+import '@container/index';
+import '@database/index';
 
 const app = express();
 

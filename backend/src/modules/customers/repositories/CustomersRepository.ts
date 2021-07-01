@@ -1,9 +1,9 @@
 import { injectable, inject } from 'tsyringe';
 import { EntityTarget } from 'typeorm';
-import BaseRepository from '@shared/infra/typeorm/BaseRepository';
+import BaseRepository from '@database/BaseRepository';
 import ICustomerRepository from '@modules/customers/repositories/ICustomersRepository';
 import ICreateCustomerDTO from '@modules/customers/dtos/ICreateCustomerDTO';
-import Customer from '@modules/customers/infra/typeorm/entities/Customer';
+import Customer from '@modules/customers/entities/Customer';
 
 @injectable()
 class CustomersRepository

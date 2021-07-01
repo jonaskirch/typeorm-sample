@@ -1,5 +1,3 @@
-import { Request } from 'express';
-
 export default interface IBaseRepository<ICreateDTO, Entity> {
   create(data: ICreateDTO): Promise<Entity>;
 

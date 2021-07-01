@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
-import CustomersRepository from '@modules/customers/infra/typeorm/repositories/CustomersRepository';
+import CustomersRepository from '@modules/customers/repositories/CustomersRepository';
 import CustomerService from '@modules/customers/services/CustomerService';
-import AppError from '@shared/errors/AppError';
+import AppError from '@errors/AppError';
 
 class CustomersController {
   public async create(req: Request, resp: Response): Promise<Response> {
