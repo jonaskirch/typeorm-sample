@@ -1,5 +1,6 @@
 import Customer from '@modules/customers/infra/typeorm/entities/Customer';
 import { injectable, inject } from 'tsyringe';
+import AppError from '@shared/errors/AppError';
 import ICustomersRepository from '../repositories/ICustomersRepository';
 
 interface IRequest {
@@ -9,20 +10,20 @@ interface IRequest {
 }
 
 @injectable()
-class CreateCustomerService {
+class CustomerService {
   constructor(
     @inject('CustomersRepository')
     private customersRepository: ICustomersRepository,
   ) {}
 
-  public async execute(
+  public async create(
     organizationSlug: string,
     { name, document, email }: IRequest,
   ): Promise<Customer> {
     await this.customersRepository.initialize(organizationSlug);
     const find = await this.customersRepository.findByDocument(document);
     if (find) {
-      throw Error('Already exists customer with same document');
+      throw new AppError('Already exists customer with same document');
     }
 
     const customer = await this.customersRepository.create({
@@ -35,4 +36,4 @@ class CreateCustomerService {
   }
 }
 
-export default CreateCustomerService;
+export default CustomerService;

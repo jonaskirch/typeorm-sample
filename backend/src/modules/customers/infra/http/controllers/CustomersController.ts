@@ -1,15 +1,15 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import CustomersRepository from '@modules/customers/infra/typeorm/repositories/CustomersRepository';
-import CreateCustomerService from '@modules/customers/services/CreateCustomerService';
+import CustomerService from '@modules/customers/services/CustomerService';
 import AppError from '@shared/errors/AppError';
 
 class CustomersController {
   public async create(req: Request, resp: Response): Promise<Response> {
     const organizationSlug = `${req.headers['x-organization-slug']}`;
     const { name, document, email } = req.body;
-    const createCustomerService = container.resolve(CreateCustomerService);
-    const customer = await createCustomerService.execute(organizationSlug, {
+    const customerService = container.resolve(CustomerService);
+    const customer = await customerService.create(organizationSlug, {
       name,
       document,
       email,

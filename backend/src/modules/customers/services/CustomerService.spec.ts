@@ -1,14 +1,12 @@
 import FakeCustomersRepository from '@modules/customers/repositories/fakes/FakeCustomersRepository';
-import CreateCustomerService from './CreateCustomerService';
+import CustomerService from './CustomerService';
 
 describe('CreateCustomer', () => {
   it('should be able to create a new customer', async () => {
     const fakeCustomersRepository = new FakeCustomersRepository();
-    const createCustomerService = new CreateCustomerService(
-      fakeCustomersRepository,
-    );
+    const customerService = new CustomerService(fakeCustomersRepository);
 
-    const customer = await createCustomerService.execute({
+    const customer = await customerService.create({
       name: 'Fulano',
       document: '12345678910',
       email: 'teste@teste.com',
