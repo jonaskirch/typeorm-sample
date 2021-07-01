@@ -3,7 +3,7 @@ import {
   createCustomer,
   updateCustomer,
 } from '@modules/customers/validators/CustomersValidator';
-import Validator from '@shared/infra/http/middlewares/validatorMiddleware';
+import validate from '@shared/infra/http/middlewares/validatorMiddleware';
 import CustomersController from '../controllers/CustomersController';
 
 const customersRouter = Router();
@@ -11,19 +11,19 @@ const customersController = new CustomersController();
 
 customersRouter.post(
   '/',
-  Validator.check(createCustomer, 'body'),
+  validate(createCustomer, 'body'),
   customersController.create,
+);
+
+customersRouter.put(
+  '/:id',
+  validate(updateCustomer, 'body'),
+  customersController.update,
 );
 
 customersRouter.get('/', customersController.index);
 
 customersRouter.get('/:id', customersController.show);
-
-customersRouter.put(
-  '/:id',
-  Validator.check(updateCustomer, 'body'),
-  customersController.update,
-);
 
 customersRouter.delete('/:id', customersController.delete);
 
