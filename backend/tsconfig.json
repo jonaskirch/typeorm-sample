@@ -15,7 +15,9 @@
       "@database/*": ["database/*"],
       "@errors/*": ["errors/*"],
       "@middlewares/*": ["middlewares/*"],
-      "@routes/*": ["routes/*"]
+      "@routes/*": ["routes/*"],
+      "@lib/*": ["lib/*"],
+      "@util/*": ["util/*"]
     },
     "esModuleInterop": true,
     "experimentalDecorators": true,
